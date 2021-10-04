@@ -12,7 +12,10 @@ Value in *launchsettings.json* will overwrite the system settings.
 ```c#
 public static Configure(IApplicationBuilder app, IWebHostEnvironment env)
 {
-    ...
+    if(env.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+    }
     app.Run(async(context) => 
     {
         await context.Response.WriteAsync("Hosting Environment: "
@@ -21,3 +24,9 @@ public static Configure(IApplicationBuilder app, IWebHostEnvironment env)
     ...
 }
 ```
+
+env (IWebHostEnvironment) has methods to detect the current Environment:
+- IsDevelopment()
+- IsStaging()
+- IsProduction() // the default
+- IsEnvironment(string Env);
