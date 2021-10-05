@@ -21,7 +21,7 @@
     ```
     This is for using MVC's default Routing. 
 2. In Configure() method, add line
-   ```C#
-   app.UseMvcWithDefaultRoute();
-   ```
-   This one should be after UseStatiFiles
+    ```C#
+    app.UseMvcWithDefaultRoute();
+    ```
+    This one should be after UseStaticFiles
