@@ -19,3 +19,29 @@ fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
 fileServerOptions.DefaultFilesOptions.DefaultFileNames.Add("customisedDefault.html");
 app.UserFileServer(fileServerOptions);
 ```
+
+## Commonly used Middleware
+
+**UseDeveloperExceptionPage** with _DeveloperExceptionPageOption**s**_
+```c#
+DeveloperExceptionPageOptions developerExceptionPageOptions = new DeveloperExceptionPageOptions
+{
+    SourceCodeLineCount = 3
+};
+```
+
+**UseDefaultFiles** with _DefaultFilesOption**s**_
+```c#
+DefaultFilesOptions defaultFilesOptions = new DefaultFilesOptions();
+defaultFilesOptions.DefaultFileNames.Clear();
+defaultFilesOptions.DefaultFileNames.Add("file.html");
+```
+
+**UseStaticFiles** with _StaticFileOption**s**_
+
+**UseFileServer** with _FileServerOption**s**_
+```C#
+FileServerOptions fileServerOptions = new FileServerOptions();
+fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
+fileServerOptions.DefaultFilesOptions.DefaultFileNames.add("file.html");
+```
