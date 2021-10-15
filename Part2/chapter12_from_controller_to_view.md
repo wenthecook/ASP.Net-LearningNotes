@@ -82,3 +82,118 @@ Three methods could be used to transfer data:
 - ViewData
 - ViewBag
 - Strong type model object, also called _Strong-Type View_
+
+### Strong Type Model
+
+This is the most common method to transfer data into view. It supports error checking pre-compiling.
+
+Using **@model** directive to declare the type of model passed into view. When we try to access the properties, we use **@Model** (notice the capital M).
+
+```c#
+public ViewResult Details()
+{
+    Student model = _studentRepository.GetStudent(1);
+    ViewBag.PageTile = "Student Details";
+
+    return View(model);
+}
+```
+
+Details.cshtml with Razor symbols inside (@ directive). Notice the first line is the declaration for model.
+```cshtml
+@model MockSchoolManage.Models.Student
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h3>@ViewBag.PageTitle</h3>
+        <div>
+            Name: @Model.Name
+        </div>
+        <div>
+            Email: @Model.Email
+        </div>
+        <div>
+            Major: @Model.Major
+        </div>
+    </body>
+</html>
+```
+
+### ViewData
+
+ViewData is a weak type **Dictionary Type Object**, which could be indexed by string type keyword.
+
+It doesn't support pre-compiling error checking.
+
+```c#
+public ViewResult Details ()
+{
+    Student model = _studentRepository.GetStudent(1);
+    ViewData["PageTitle"] = "Student Details";
+    ViewData["Student"] = model;
+
+    return View();
+}
+```
+
+Details.cshtml is a html page with Razor symbols inside (@ directive).
+```cshtml
+@using MockSchoolManage.Models
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h3>@ViewData["PageTitle"]</h3>
+        @{ var student = ViewData["Student"] as Student; }
+        <div>
+            Name: @student.Name
+        </div>
+        <div>
+            Email: @student.Email
+        </div>
+        <div>
+            Major: @student.Major
+        </div>
+    </body>
+</html>
+```
+
+### ViewBag
+
+ViewBag is a decorator for ViewData. The only difference is ViewData uses string keyword, but ViewBag uses Dynamic properties.
+
+
+```c#
+public ViewResult Details ()
+{
+    Student model = _studentRepository.GetStudent(1);
+    ViewBag.PageTitle = "Student Details";
+    ViewDataBag.Student = model;
+
+    return View();
+}
+```
+
+Details.cshtml is a html page with Razor symbols inside (@ directive).
+```cshtml
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h3>@ViewDataBag.PageTitle</h3>
+        <div>
+            Name: @ViewBag.student.Name
+        </div>
+        <div>
+            Email: @ViewBag.student.Email
+        </div>
+        <div>
+            Major: @ViewBag.student.Major
+        </div>
+    </body>
+</html>
+```
