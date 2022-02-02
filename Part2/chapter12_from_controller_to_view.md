@@ -14,6 +14,8 @@
 - Controllers will create Model to query data. _Services_ will be injected by _Dependency Injection_ into Controllers.
 - Usually we make dependencies (services, instances of some interfaces, like _studentRepository) **readonly**. 
 
+<hr>
+
 ## Respond Certain Format of Data from Controller
 
 We can force the method in controller return a certain format of data, like JSON, despite the request headers: "Accept Header".
@@ -37,6 +39,7 @@ If we want the response format and header to follow the request header, we could
 public ObjectResult Details()
 {
     Student model = _studentRepository.GetStudent(1);
+    // P.S. ObjectResult is a Class, but Json is a function
     return new ObjectResult(model);
 }
 ```
@@ -72,7 +75,7 @@ View files are **Razor View** type.
 ### View() Method
 
 - View() will search cshtml files in the two default paths.
-- View(string viewName) will use cshtml file in path viewName. Notice, **viewName** is a **path string**. It could be relative or absolute like "../MyViews/Test", "MyViews/Test.cshtml", "/MyViews/Test.cshtml" or "~/MyViews/Test.cshtml". _Absolute path_ must be with ".cshtml" suffix.
+- View(string viewName) will use cshtml file in path viewName. Notice, **viewName** is a **path string**. It could be relative or absolute like "../MyViews/Test", "MyViews/Test.cshtml", "/MyViews/Test.cshtml" or "~/MyViews/Test.cshtml". _Absolute path_ must be with ".cshtml" suffix, but _Relative Path_ could ignore the ".cshtml" at the end.
 - View(object model) will transfer the object model into the default view file.
 - View(string viewName, object model) will choose view file viewName and pass the model into it.
 
